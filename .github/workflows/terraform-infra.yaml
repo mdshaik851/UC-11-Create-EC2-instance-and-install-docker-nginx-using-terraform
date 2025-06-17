@@ -99,7 +99,7 @@ jobs:
 
       - name: Run OPA Validation
         run: |
-          opa eval --format pretty --data terraform/terraform_policies.rego --input tfplan.json "data.terraform.policies"
+          opa eval --format pretty --data policy/terraform_policies.rego --input tfplan.json "data.terraform.policies"
 
       - name: Terraform Test
         id: test
