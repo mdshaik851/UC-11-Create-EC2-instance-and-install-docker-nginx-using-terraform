@@ -44,12 +44,11 @@ resource "aws_instance" "ngnix_instance" {
   security_groups   = [aws_security_group.ngnix_instance_sg.name]
   user_data = <<-EOF
                 #!/bin/bash
-                sudo apt update -y
-                sudo apt-get install -y docker.io
-                sudo systemctl start docker
-                sudo systemctl enable docker
-                sudo usermod -aG docker ubuntu
-                sudo docker run --name mynginx -p 80:80 -d nginx
+                sudo apt-get update -y
+                sudo apt-get install nginx -y
+                sudo systemctl start nginx
+                sudo systemctl enable nginx
+                echo "<h1>Hello from $(hostname -f) in us-west-1</h1>" | sudo tee /var/www/html/index.html
             EOF
 
   tags = {
